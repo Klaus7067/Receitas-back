@@ -1,5 +1,5 @@
 class Receita{
-    constructor(titulo, descricao,modo_preparo,tempo_preparo){
+    constructor(titulo, descricao, modo_preparo,tempo_preparo){
         this.titulo=titulo
         this.descricao=descricao
         this.modo_preparo=modo_preparo
