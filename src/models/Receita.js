@@ -1,9 +1,9 @@
 class Receita{
-    constructor(titulo, descricao,status,data_criacao){
+    constructor(titulo, descricao,modo_preparo,tempo_preparo){
         this.titulo=titulo
         this.descricao=descricao
-        this.status=status
-        this.data_criacao=data_criacao
+        this.modo_preparo=this.modo_preparo
+        this.tempo_preparo=this.tempo_preparo
     }
 }
 export default Receita
