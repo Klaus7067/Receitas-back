@@ -1,8 +1,8 @@
 class Receita{
-    constructor(titulo, descricao,status,tempo_preparo){
+    constructor(titulo, ingredientes,modo_preparo,tempo_preparo){
         this.titulo=titulo
-        this.descricao=descricao
-        this.status=status
+        this.ingredientes=ingredientes
+        this.modo_preparo=modo_preparo
         this.tempo_preparo=tempo_preparo
     }
 }

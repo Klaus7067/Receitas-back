@@ -37,7 +37,7 @@ function ReceitaController(app) {
                 filename: './src/infra/bdReceitas.db',
                 driver: sqlite3.Database
             })
-            await db.run(`INSERT INTO Receitas(titulo,descricao,status,tempo_preparo,id_usuario) VALUES(?,?,?,?,?)`, req.body.titulo, req.body.descricao, req.body.status, req.body.tempo_preparo, req.body.id_usuario)
+            await db.run(`INSERT INTO Receitas(titulo,ingredientes,modo_preparo,tempo_preparo,id_usuario) VALUES(?,?,?,?,?)`, req.body.titulo, req.body.descricao, req.body.status, req.body.tempo_preparo, req.body.id_usuario)
             res.send(`Receita: ${req.body.titulo} inserida com sucesso.`)
             db.close()
         })()
@@ -86,7 +86,7 @@ function ReceitaController(app) {
             const result = await db.all('SELECT * FROM Receitas where titulo like ?', req.body.titulo)
             if (result != '') {
                 res.send(`Receitas: ${req.body.titulo} Atualizada`)
-                await db.run('UPDATE Receitas SET titulo=?, descricao=?, status=?, tempo_preparo=?, id_usuario=? WHERE titulo= ?', req.body.titulo, req.body.descricao, req.body.status, req.body.tempo_preparo, req.body.id_usuario)
+                await db.run('UPDATE Receitas SET titulo=?, ingredientes=?, modo_preparo=?, tempo_preparo=?, id_usuario=? WHERE titulo= ?', req.body.titulo, req.body.descricao, req.body.status, req.body.tempo_preparo, req.body.id_usuario)
             } else {
                 res.send(`Receitas: ${req.body.titulo} não encontrada`)
             }
