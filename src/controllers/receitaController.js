@@ -6,7 +6,7 @@ function ReceitaController(app) {
     function exibir(req, res) {
         (async () => {
             const db = await open({
-                filename: './src/infra/bdReceitas.db',
+                filename: './src/infra/Database.db',
                 driver: sqlite3.Database
             })
             const result = await db.all('SELECT * FROM Receitas')
@@ -14,18 +14,18 @@ function ReceitaController(app) {
             db.close()
         })()
     }
-    app.get('/receita/titulo/:titulo', buscarTitulo)
-    function buscarTitulo(req, res) {
+    app.get('/receita/name/:name', buscarname)
+    function buscarname(req, res) {
         (async () => {
             const db = await open({
-                filename: './src/infra/bdReceitas.db',
+                filename: './src/infra/Database.db',
                 driver: sqlite3.Database
             })
-            const result = await db.all('SELECT * FROM Receitas where titulo like ?', req.body.titulo)
+            const result = await db.all('SELECT * FROM Receitas where name like ?', req.body.name)
             if (result != '') {
                 res.send(result)
             } else {
-                res.send(`Receitas com titulo: ${req.body.titulo} não encontrado`)
+                res.send(`Receitas com name: ${req.body.name} não encontrado`)
             }
             db.close()
         })()
@@ -34,61 +34,61 @@ function ReceitaController(app) {
     function inserir(req, res) {
         (async () => {
             const db = await open({
-                filename: './src/infra/bdReceitas.db',
+                filename: './src/infra/Database.db',
                 driver: sqlite3.Database
             })
-            await db.run(`INSERT INTO Receitas(titulo,ingredientes,modo_preparo,tempo_preparo,id_usuario) VALUES(?,?,?,?,?)`, req.body.titulo, req.body.descricao, req.body.status, req.body.tempo_preparo, req.body.id_usuario)
-            res.send(`Receita: ${req.body.titulo} inserida com sucesso.`)
+            await db.run(`INSERT INTO Receitas(name,publishing,author,price,image) VALUES(?,?,?,?,?)`, req.body.name, req.body.publishing, req.body.author, req.body.price, req.body.image)
+            res.send(`Receita: ${req.body.name} inserida com sucesso.`)
             db.close()
         })()
     }
-    app.delete('/receita/titulo/:titulo', deletarTitulo)
-    function deletarTitulo(req, res) {
+    app.delete('/receita/name/:name', deletarname)
+    function deletarname(req, res) {
         (async () => {
             const db = await open({
-                filename: './src/infra/bdReceitas.db',
+                filename: './src/infra/Database.db',
                 driver: sqlite3.Database
             })
-            const result = await db.all('SELECT * FROM Receitas where titulo like ?', req.body.titulo)
+            const result = await db.all('SELECT * FROM Receitas where name like ?', req.body.name)
             if (result != '') {
-                res.send(`Receitas com titulo: ${req.body.titulo} deletada`)
-                await db.run('DELETE from Receitas WHERE titulo= ?', req.body.titulo)
+                res.send(`Receitas com name: ${req.body.name} deletada`)
+                await db.run('DELETE from Receitas WHERE name= ?', req.body.name)
             } else {
-                res.send(`Receitas com titulo: ${req.body.titulo} não encontrada`)
+                res.send(`Receitas com name: ${req.body.name} não encontrada`)
             }
             db.close()
         })()
     }
-    app.delete('/receita/titulo/:titulo', deletarTitulo)
-    function deletarTitulo(req, res) {
+    app.delete('/receita/name/:name', deletarname)
+    function deletarname(req, res) {
         (async () => {
             const db = await open({
-                filename: './src/infra/bdReceitas.db',
+                filename: './src/infra/Database.db',
                 driver: sqlite3.Database
             })
-            const result = await db.all('SELECT * FROM Receitas where titulo like ?', req.body.titulo)
+            const result = await db.all('SELECT * FROM Receitas where name like ?', req.body.name)
             if (result != '') {
-                res.send(`Receitas: ${req.body.titulo} deletada`)
-                await db.run('DELETE from Receitas WHERE titulo= ?', req.body.titulo)
+                res.send(`Receitas: ${req.body.name} deletada`)
+                await db.run('DELETE from Receitas WHERE name= ?', req.body.name)
             } else {
-                res.send(`Receitas: ${req.body.titulo} não encontrada`)
+                res.send(`Receitas: ${req.body.name} não encontrada`)
             }
             db.close()
         })()
     }
-    app.put('/receita/titulo/:titulo', Atualizar)
+    app.put('/receita/name/:name', Atualizar)
     function Atualizar(req, res) {
         (async () => {
             const db = await open({
-                filename: './src/infra/bdReceitas.db',
+                filename: './src/infra/Database.db',
                 driver: sqlite3.Database
             })
-            const result = await db.all('SELECT * FROM Receitas where titulo like ?', req.body.titulo)
+            const result = await db.all('SELECT * FROM Receitas where name like ?', req.body.name)
             if (result != '') {
-                res.send(`Receitas: ${req.body.titulo} Atualizada`)
-                await db.run('UPDATE Receitas SET titulo=?, ingredientes=?, modo_preparo=?, tempo_preparo=?, id_usuario=? WHERE titulo= ?', req.body.titulo, req.body.descricao, req.body.status, req.body.tempo_preparo, req.body.id_usuario)
+                res.send(`Receitas: ${req.body.name} Atualizada`)
+                await db.run('UPDATE Receitas SET name=?, publishing=?, author=?, price=?, image=?, id=? WHERE name= ?', req.body.name, req.body.publishing, req.body.author, req.body.price, req.body.image)
             } else {
-                res.send(`Receitas: ${req.body.titulo} não encontrada`)
+                res.send(`Receitas: ${req.body.name} não encontrada`)
             }
             db.close()
         })()

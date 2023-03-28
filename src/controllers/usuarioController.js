@@ -6,7 +6,7 @@ function UsuarioController(app) {
     function exibir(req, res) {
         (async () => {
             const db = await open({
-                filename: './src/infra/bdReceitas.db',
+                filename: './src/infra/Database.db',
                 driver: sqlite3.Database
             })
             const result = await db.all('SELECT * FROM Usuario')
@@ -19,7 +19,7 @@ function UsuarioController(app) {
     function buscarEmail(req, res) {
         (async () => {
             const db = await open({
-                filename: './src/infra/bdReceitas.db',
+                filename: './src/infra/Database.db',
                 driver: sqlite3.Database
             })
             const result = await db.all('SELECT * FROM Usuario where email like ?', req.params.email)
@@ -35,7 +35,7 @@ function UsuarioController(app) {
     function buscarNome(req, res) {
         (async () => {
             const db = await open({
-                filename: './src/infra/bdReceitas.db',
+                filename: './src/infra/Database.db',
                 driver: sqlite3.Database
             })
             const result = await db.all(`SELECT * FROM Usuario where nome like ?`, req.params.nome)
@@ -51,7 +51,7 @@ function UsuarioController(app) {
     function inserir(req, res) {
         (async () => {
             const db = await open({
-                filename: './src/infra/bdReceitas.db',
+                filename: './src/infra/Database.db',
                 driver: sqlite3.Database
             })
             await db.run(`INSERT INTO Usuario(nome,email,senha) VALUES(?,?,?)`, req.body.nome, req.body.email, req.body.senha)
@@ -63,7 +63,7 @@ function UsuarioController(app) {
     function deletarEmail(req, res) {
         (async () => {
             const db = await open({
-                filename: './src/infra/bdReceitas.db',
+                filename: './src/infra/Database.db',
                 driver: sqlite3.Database
             })
             const result = await db.all('SELECT * FROM Usuario where email like ?', req.params.email)
@@ -80,7 +80,7 @@ function UsuarioController(app) {
     function deletarNome(req, res) {
         (async () => {
             const db = await open({
-                filename: './src/infra/bdReceitas.db',
+                filename: './src/infra/Database.db',
                 driver: sqlite3.Database
             })
             const result = await db.all('SELECT * FROM Usuario where nome like ?', req.params.nome)
@@ -97,7 +97,7 @@ function UsuarioController(app) {
     function Atualizar(req, res) {
         (async () => {
             const db = await open({
-                filename: './src/infra/bdReceitas.db',
+                filename: './src/infra/Database.db',
                 driver: sqlite3.Database
             })
             const result = await db.all('SELECT * FROM Usuario where email like ?', req.params.email)
