@@ -37,7 +37,7 @@ function BookController(app) {
                 filename: './src/infra/bdReceitas.db',
                 driver: sqlite3.Database
             })
-            await db.run(`INSERT INTO Book(name,publishing,author,description,price, image) VALUES(?,?,?,?,?,?)`, req.body.name, req.body.publishing, req.body.author, req.body.description, req.body.price, req.body.image)
+            await db.run(`INSERT INTO Book(name,publishing,author,description, image) VALUES(?,?,?,?,?)`, req.body.name, req.body.publishing, req.body.author, req.body.description, req.body.image)
             res.send(`Book: ${req.body.name} inserida com sucesso.`)
             db.close()
         })()
