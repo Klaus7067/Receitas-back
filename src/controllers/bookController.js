@@ -9,7 +9,7 @@ function BookController(app) {
                 filename: './src/infra/bdReceitas.db',
                 driver: sqlite3.Database
             })
-            const result = await db.all('SELECT * FROM Books')
+            const result = await db.all('SELECT * FROM Book')
             res.send(result)
             db.close()
         })()
@@ -21,11 +21,11 @@ function BookController(app) {
                 filename: './src/infra/bdReceitas.db',
                 driver: sqlite3.Database
             })
-            const result = await db.all('SELECT * FROM Books where name like ?', req.body.name)
+            const result = await db.all('SELECT * FROM Book where name like ?', req.body.name)
             if (result != '') {
                 res.send(result)
             } else {
-                res.send(`Books com name: ${req.body.name} não encontrado`)
+                res.send(`Book com name: ${req.body.name} não encontrado`)
             }
             db.close()
         })()
@@ -37,7 +37,7 @@ function BookController(app) {
                 filename: './src/infra/bdReceitas.db',
                 driver: sqlite3.Database
             })
-            await db.run(`INSERT INTO Books(name,publishing,author,description,price, image) VALUES(?,?,?,?,?,?)`, req.body.name, req.body.publishing, req.body.author, req.body.description, req.body.price, req.body.image)
+            await db.run(`INSERT INTO Book(name,publishing,author,description,price, image) VALUES(?,?,?,?,?,?)`, req.body.name, req.body.publishing, req.body.author, req.body.description, req.body.price, req.body.image)
             res.send(`Book: ${req.body.name} inserida com sucesso.`)
             db.close()
         })()
@@ -49,12 +49,12 @@ function BookController(app) {
                 filename: './src/infra/bdReceitas.db',
                 driver: sqlite3.Database
             })
-            const result = await db.all('SELECT * FROM Books where name like ?', req.body.name)
+            const result = await db.all('SELECT * FROM Book where name like ?', req.body.name)
             if (result != '') {
-                res.send(`Books com name: ${req.body.name} deletada`)
-                await db.run('DELETE from Books WHERE name= ?', req.body.name)
+                res.send(`Book com name: ${req.body.name} deletada`)
+                await db.run('DELETE from Book WHERE name= ?', req.body.name)
             } else {
-                res.send(`Books com name: ${req.body.name} não encontrada`)
+                res.send(`Book com name: ${req.body.name} não encontrada`)
             }
             db.close()
         })()
@@ -66,12 +66,12 @@ function BookController(app) {
                 filename: './src/infra/bdReceitas.db',
                 driver: sqlite3.Database
             })
-            const result = await db.all('SELECT * FROM Books where name like ?', req.body.name)
+            const result = await db.all('SELECT * FROM Book where name like ?', req.body.name)
             if (result != '') {
-                res.send(`Books: ${req.body.name} deletada`)
-                await db.run('DELETE from Books WHERE name= ?', req.body.name)
+                res.send(`Book: ${req.body.name} deletada`)
+                await db.run('DELETE from Book WHERE name= ?', req.body.name)
             } else {
-                res.send(`Books: ${req.body.name} não encontrada`)
+                res.send(`Book: ${req.body.name} não encontrada`)
             }
             db.close()
         })()
@@ -83,12 +83,12 @@ function BookController(app) {
                 filename: './src/infra/bdReceitas.db',
                 driver: sqlite3.Database
             })
-            const result = await db.all('SELECT * FROM Books where name like ?', req.body.name)
+            const result = await db.all('SELECT * FROM Book where name like ?', req.body.name)
             if (result != '') {
-                res.send(`Books: ${req.body.name} Atualizada`)
-                await db.run('UPDATE Books SET name=?, publishing=?, author=?, description=?, price=?, image=?, name=? WHERE name= ?', req.body.name, req.body.publishing, req.body.author, req.body.description, req.body.price, req.body.image)
+                res.send(`Book: ${req.body.name} Atualizada`)
+                await db.run('UPDATE Book SET name=?, publishing=?, author=?, description=?, price=?, image=?, name=? WHERE name= ?', req.body.name, req.body.publishing, req.body.author, req.body.description, req.body.price, req.body.image)
             } else {
-                res.send(`Books: ${req.body.name} não encontrada`)
+                res.send(`Book: ${req.body.name} não encontrada`)
             }
             db.close()
         })()
