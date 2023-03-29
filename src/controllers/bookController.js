@@ -14,18 +14,18 @@ function BookController(app) {
             db.close()
         })()
     }
-    app.get('/book/name/:name', buscarName)
-    function buscarName(req, res) {
+    app.get('/book/:id', buscarId)
+    function buscarId(req, res) {
         (async () => {
             const db = await open({
                 filename: './src/infra/bdReceitas.db',
                 driver: sqlite3.Database
             })
-            const result = await db.all('SELECT * FROM Book where name like ?', req.body.name)
+            const result = await db.all('SELECT * FROM Book where id like ?', req.params.id)
             if (result != '') {
                 res.send(result)
             } else {
-                res.send(`Book com name: ${req.body.name} não encontrado`)
+                res.send(`Book com name: ${req.params.id} não encontrado`)
             }
             db.close()
         })()
