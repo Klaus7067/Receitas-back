@@ -69,7 +69,7 @@ function BookController(app) {
             const result = await db.all('SELECT * FROM Book where id like ?', req.params.id)
             if (result != '') {
                 res.send(`Book: ${req.params.id} Atualizada`)
-                await db.run('UPDATE Book SET name=?, publishing=?, author=?, description=?, image=?, name=? WHERE id= ?', req.body.name, req.body.publishing, req.body.author, req.body.description, req.body.image, req.params.id)
+                await db.run('UPDATE Book SET name=?, publishing=?, author=?, description=?, image=? WHERE id= ?', req.body.name, req.body.publishing, req.body.author, req.body.description, req.body.image, req.params.id)
             } else {
                 res.send(`Book: ${req.params.id} não encontrada`)
             }
