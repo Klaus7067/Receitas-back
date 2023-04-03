@@ -18,7 +18,7 @@ git clone https://github.com/Klaus7067/Receitas-back.git
 Vá até o diretório do projeto:
 
 ```bash
-cd receitas-dia-a-dia
+cd receitas-back.git
 ```
 
 Instale as dependências:
@@ -30,7 +30,7 @@ npm install
 Inicie o servidor local:
 
 ```bash
-npm run dev
+npm start
 ```
 
 > Isso irá criar o servidor, e as tabelas do banco de dados se a conexão com o mesmo for bem sucedida.
